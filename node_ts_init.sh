@@ -9,6 +9,8 @@ npx tsc --init --rootDir src --outDir lib --esModuleInterop --resolveJsonModule 
 
 mkdir src
 
+touch src/index.ts
+
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Node and TypeScript setup completed."
 printf "\n\n"
