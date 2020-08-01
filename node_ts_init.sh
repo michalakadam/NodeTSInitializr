@@ -1,5 +1,12 @@
 #! /bin/bash
 
+printEmptyLine () {
+    for (( i=0; i<$1; i++ ))
+	do  
+   	    printf "\n"
+	done
+}
+
 projectsDirectory=~/Documents
 
 # Collect project name, description and name
@@ -23,8 +30,10 @@ if [[ -d "$projectsDirectory"/"$projectName" ]]; then
 else
     mkdir -p "$projectsDirectory"/"$projectName"
 fi
+
+printEmptyLine 1
 printf '\e[1;32m%-6s\e[m' "Project directory successfully created."
-printf "\n\n"
+printEmptyLine 2
 
 # Navigate to project directory
 cd "$projectsDirectory"/"$projectName"/
@@ -48,9 +57,9 @@ mkdir src
 
 touch src/index.ts
 
-printf "\n"
+printEmptyLine 1
 printf '\e[1;32m%-6s\e[m' "Node and TypeScript setup completed."
-printf "\n\n"
+printEmptyLine 2
 
 # Live compile + run
 npm install ts-node --save-dev
@@ -60,7 +69,7 @@ sed 's#"test":.*#"start": "npm run build:live",\n    "build": "tsc -p .",\n    "
 mv package.tmp package.json
 
 printf '\e[1;32m%-6s\e[m' "Live compile + run set successfully."
-printf "\n\n"
+printEmptyLine 2
 
 # Initialize empty git repository
 git init
@@ -86,7 +95,7 @@ git add .
 git commit -m "initial commit with project template generated"
 git checkout -b development
 
-printf "\n"
+printEmptyLine 1
 printf '\e[1;32m%-6s\e[m' "Git repo initialized."
 
 code .
