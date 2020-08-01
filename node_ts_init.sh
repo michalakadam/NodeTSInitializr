@@ -3,7 +3,6 @@
 projectsDirectory=~/Documents
 
 # Collect project name, description and name
-
 correctInputFlag=0
 while [[ "$correctInputFlag" -eq 0 ]]; do
     read -p "Name of the project: " projectName
@@ -31,7 +30,7 @@ printf "\n\n"
 cd "$projectsDirectory"/"$projectName"/
 
 # Create README.md out of template
-curl https://raw.githubusercontent.com/michalakadam/NodeTSInitializr/master/templates/readme_template.md > readme_template.md
+curl https://raw.githubusercontent.com/michalakadam/Node_TS_Initializr/master/templates/readme_template.md > readme_template.md
 
 sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" readme_template.md > README.md
 rm readme_template.md
