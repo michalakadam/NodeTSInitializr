@@ -1,5 +1,39 @@
 #! /bin/bash
 
+projectsDirectory=~/Documents
+
+# Collect project name, description and name
+
+correctInputFlag=0
+while [[ "$correctInputFlag" -eq 0 ]]; do
+    read -p "Name of the project: " projectName
+    if [[ -z "$projectName" ]]; then
+        echo "No arguments, try again."
+    else
+        correctInputFlag=$(( correctInputFlag+1 ))
+    fi
+done
+
+read -p "Feed me a short project description: " description
+read -p "What's your email? (will be visible in README): " author_mail
+
+# Create project directory if it does not already exist
+if [[ -d "$projectsDirectory"/"$projectName" ]]; then
+    echo "Project with such a name already exist. Terminating..."
+    exit 1
+else
+    mkdir -p "$projectsDirectory"/"$projectName"
+fi
+printf '\e[1;32m%-6s\e[m' "Project directory successfully created."
+printf "\n\n"
+
+# Create README.md out of template
+sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" ./templates/readme > "$projectsDirectory"/"$projectName"/README.md
+printf "Adding README... DONE.\n"
+
+# Navigate to project directory
+cd "$projectsDirectory"/"$projectName"/
+
 npm init -y
 
 npm install typescript --save-dev
