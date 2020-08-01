@@ -27,13 +27,17 @@ fi
 printf '\e[1;32m%-6s\e[m' "Project directory successfully created."
 printf "\n\n"
 
-# Create README.md out of template
-sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" ./templates/readme > "$projectsDirectory"/"$projectName"/README.md
-printf "Adding README... DONE.\n"
-
 # Navigate to project directory
 cd "$projectsDirectory"/"$projectName"/
 
+# Create README.md out of template
+curl https://raw.githubusercontent.com/michalakadam/NodeTSInitializr/master/templates/readme_template.md > readme_template.md
+
+sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" readme_template.md > README.md
+rm readme_template.md
+printf "Adding README... DONE.\n"
+
+# Initialize node with typescript support
 npm init -y
 
 npm install typescript --save-dev
