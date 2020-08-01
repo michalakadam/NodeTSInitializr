@@ -51,3 +51,5 @@ git checkout -b development
 
 printf "\n"
 printf '\e[1;32m%-6s\e[m' "Git repo initialized."
+
+code .
