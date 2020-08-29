@@ -7,12 +7,12 @@ printEmptyLine () {
 	done
 }
 
-projectsDirectory=~/Documents
-
 # Collect project name, description and name
 correctInputFlag=0
 while [[ "$correctInputFlag" -eq 0 ]]; do
     read -p "Name of the project: " projectName
+    projectName=$(echo $projectName | sed -e 's/ /_/g')
+    echo Here it is: $projectName
     if [[ -z "$projectName" ]]; then
         echo "No arguments, try again."
     else
@@ -24,11 +24,11 @@ read -p "Feed me a short project description: " description
 read -p "What's your email? (will be visible in README): " author_mail
 
 # Create project directory if it does not already exist
-if [[ -d "$projectsDirectory"/"$projectName" ]]; then
+if [[ -d "$(pwd)"/"$projectName" ]]; then
     echo "Project with such a name already exist. Terminating..."
     exit 1
 else
-    mkdir -p "$projectsDirectory"/"$projectName"
+    mkdir -p "$(pwd)"/"$projectName"
 fi
 
 printEmptyLine 1
@@ -36,7 +36,7 @@ printf '\e[1;32m%-6s\e[m' "Project directory successfully created."
 printEmptyLine 2
 
 # Navigate to project directory
-cd "$projectsDirectory"/"$projectName"/
+cd "$(pwd)"/"$projectName"/
 
 # Create README.md out of template
 curl https://raw.githubusercontent.com/michalakadam/Node_TS_Initializr/master/templates/readme_template.md > readme_template.md
