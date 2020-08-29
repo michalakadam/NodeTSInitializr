@@ -1,6 +1,6 @@
-# NodeTSInitializr
+# node_ts_initializr
 
-### Shell script initializing new Node + TypeScript project.
+### Script initializing new Node + TypeScript + Jasmine project with live reload enabled.
 
 ##### Script functionalities:
 * creates project folder in ~/Documents
@@ -16,7 +16,7 @@
 <br/>
 ```npm i node_ts_initializr```
 
-**Cloning from GitHub**
+**Cloning GitHub repo**
 
 1. Clone this repo to the desired location: <br/> ```git clone https://github.com/michalakadam/Node_TS_Initializr.git```
 2. Enter directory with the script: <br/> ```cd NodeTSInitializr```
