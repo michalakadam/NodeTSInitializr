@@ -20,7 +20,7 @@ while [[ "$correctInputFlag" -eq 0 ]]; do
 done
 
 read -p "Feed me a short project description: " description
-read -p "What's your email? (will be visible in README): " author_mail
+read -p "What's your email? (will be visible in README and package.json): " author_mail
 
 # Create project directory if it does not already exist
 if [[ -d "$(pwd)"/"$projectName" ]]; then
@@ -37,15 +37,16 @@ printEmptyLine 2
 # Navigate to project directory
 cd "$(pwd)"/"$projectName"/
 
-# Create README.md out of template
-curl https://raw.githubusercontent.com/michalakadam/Node_TS_Initializr/master/templates/readme_template.md > readme_template.md
-
-sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" readme_template.md > README.md
-rm readme_template.md
-printf "Adding README... DONE.\n"
-
 # Initialize node with typescript support
-npm init -y
+npm set init.author.email "$author_mail"
+npm set init.description "$description"
+npm init -y --loglevel=quiet
+
+sed "s/index.js/index.ts/g" package.json > package.tmp
+mv package.tmp package.json
+
+sed 's#"test":.*#"start": "npm run build:live",\n    "build": "tsc -p .",\n    "build:live": "nodemon --watch \x27src/**/*.ts\x27 --exec \x27ts-node\x27 src/index.ts",\n    "test": "jasmine-ts --config=jasmine.json"#g' package.json > package.tmp
+mv package.tmp package.json
 
 npm install typescript --save-dev
 npm install @types/node --save-dev
@@ -64,18 +65,32 @@ printEmptyLine 2
 npm install ts-node --save-dev
 npm install nodemon --save-dev
 
-sed 's#"test":.*#"start": "npm run build:live",\n    "build": "tsc -p .",\n    "build:live": "nodemon --watch \x27src/**/*.ts\x27 --exec \x27ts-node\x27 src/index.ts"#g' package.json > package.tmp
-mv package.tmp package.json
-
 printf '\e[1;32m%-6s\e[m' "Live compile + run set successfully."
 printEmptyLine 2
 
 # Jasmine setup
-npm install --save-dev jasmine
-npx jasmine init
+npm install --save-dev jasmine @types/jasmine
+npm install --save-dev jasmine-ts
+npm install --save-dev jasmine-spec-reporter
+mkdir spec
+curl https://raw.githubusercontent.com/michalakadam/Node_TS_Initializr/master/templates/jasmine_config_template.json > jasmine.json
+
+printEmptyLine 1
+printf '\e[1;32m%-6s\e[m' "Jasmine setup completed."
+printEmptyLine 2
 
 # Fix any vurnerabilities
 npm audit fix
+
+# Create README.md out of template
+curl https://raw.githubusercontent.com/michalakadam/Node_TS_Initializr/master/templates/readme_template.md > readme_template.md
+
+sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" readme_template.md > README.md
+rm readme_template.md
+
+printEmptyLine 1
+printf '\e[1;32m%-6s\e[m' "Adding README... DONE."
+printEmptyLine 2
 
 # Initialize empty git repository
 git init
