@@ -5,6 +5,7 @@
 ##### Script functionalities:
 * creates project folder in ~/Documents
 * initializes node with typescript and live reload
+* adds jasmine with typescript support
 * creates git repo with initial commit on *development* branch
 * adds .gitignore including node and visual studio code
 * opens project in vsc
