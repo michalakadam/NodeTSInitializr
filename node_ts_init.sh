@@ -71,6 +71,10 @@ mv package.tmp package.json
 printf '\e[1;32m%-6s\e[m' "Live compile + run set successfully."
 printEmptyLine 2
 
+# Jasmine setup
+npm install --save-dev jasmine
+npx jasmine init
+
 # Initialize empty git repository
 git init
 
