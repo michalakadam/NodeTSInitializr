@@ -74,6 +74,9 @@ printEmptyLine 2
 npm install --save-dev jasmine
 npx jasmine init
 
+# Fix any vurnerabilities
+npm audit fix
+
 # Initialize empty git repository
 git init
 
