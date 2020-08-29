@@ -3,7 +3,7 @@
 ### Script initializing new Node + TypeScript + Jasmine project with live reload enabled.
 
 ##### Script functionalities:
-* creates project folder in ~/Documents
+* creates project folder in current location
 * initializes node with typescript and live reload
 * adds jasmine with typescript support
 * creates git repo with initial commit on *development* branch
