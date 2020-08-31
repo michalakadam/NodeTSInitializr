@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 printEmptyLine () {
     for (( i=0; i<$1; i++ ))
