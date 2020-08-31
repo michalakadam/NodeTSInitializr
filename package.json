@@ -6,5 +6,9 @@
         "install": "sudo chmod u+x ./node_ts_init.sh && ./node_ts_init.sh"
     },
     "author": "Adam Michalak <adam.michalak.dev@gmail.com>",
-    "license": "MIT"
+    "license": "MIT",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/michalakadam/Node_TS_Initializr"
+    }
 }
