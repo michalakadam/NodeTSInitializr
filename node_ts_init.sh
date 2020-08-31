@@ -40,7 +40,7 @@ cd "$(pwd)"/"$projectName"/
 # Initialize node with typescript support
 npm set init.author.email "$author_mail"
 npm set init.description "$description"
-npm init -y --loglevel=quiet
+npm init -y
 
 sed "s/index.js/index.ts/g" package.json > package.tmp
 mv package.tmp package.json
