@@ -22,25 +22,42 @@ done
 read -p "Feed me a short project description: " description
 read -p "What's your email? (will be visible in README and package.json): " author_mail
 
+# Project needs to be initialized in parent directory.
+# pwd points to node_modules when installing with npm.
+projectdir="$(dirname "$(pwd)")"
+
 # Create project directory if it does not already exist
-if [[ -d "$(pwd)"/"$projectName" ]]; then
+if [[ -d "$projectdir"/"$projectName" ]]; then
     echo "Project with such a name already exist. Terminating..."
     exit 1
 else
-    mkdir -p "$(pwd)"/"$projectName"
+    mkdir -p "$projectdir"/"$projectName"
 fi
 
 printEmptyLine 1
-printf '\e[1;32m%-6s\e[m' "Project directory successfully created."
+printf '\e[1;32m%-6s\e[m' "Project directory successfully created at $projectdir"
 printEmptyLine 2
 
 # Navigate to project directory
-cd "$(pwd)"/"$projectName"/
+cd "$projectdir"/"$projectName"/
+
+# Create README.md out of template
+curl https://raw.githubusercontent.com/michalakadam/Node_TS_Initializr/master/templates/readme_template.md > readme_template.md
+
+sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" readme_template.md > README.md
+rm readme_template.md
+
+printEmptyLine 1
+printf '\e[1;32m%-6s\e[m' "Adding README... DONE."
+printEmptyLine 2
 
 # Initialize node with typescript support
 npm set init.author.email "$author_mail"
 npm set init.description "$description"
 npm init -y
+
+sed "s/#####//g" package.json > package.tmp
+mv package.tmp package.json
 
 sed "s/index.js/index.ts/g" package.json > package.tmp
 mv package.tmp package.json
@@ -81,16 +98,6 @@ printEmptyLine 2
 
 # Fix any vurnerabilities
 npm audit fix
-
-# Create README.md out of template
-curl https://raw.githubusercontent.com/michalakadam/Node_TS_Initializr/master/templates/readme_template.md > readme_template.md
-
-sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/MAIL/$author_mail/g" readme_template.md > README.md
-rm readme_template.md
-
-printEmptyLine 1
-printf '\e[1;32m%-6s\e[m' "Adding README... DONE."
-printEmptyLine 2
 
 # Initialize empty git repository
 git init
