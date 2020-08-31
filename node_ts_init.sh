@@ -24,7 +24,8 @@ read -p "What's your email? (will be visible in README and package.json): " auth
 
 # Project needs to be initialized in parent directory.
 # pwd points to node_modules when installing with npm.
-projectdir="$(dirname "$(pwd)")"
+nodemoduledir=$(dirname $(pwd))
+projectdir="${nodemoduledir%/*}"
 
 # Create project directory if it does not already exist
 if [[ -d "$projectdir"/"$projectName" ]]; then
