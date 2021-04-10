@@ -1,7 +1,7 @@
 {
     "name": "node_ts_initializr",
-    "version": "1.0.4",
-    "description": "Initialize new Node + TypeScript project with correct folder structure, jasmine support, git and live reload.",
+    "version": "1.1.0",
+    "description": "Initialize new Node + TypeScript project with correct folder structure, es modules, optional jasmine support, git and live reload.",
     "scripts": {
         "install": "sudo chmod u+x ./node_ts_init.sh && ./node_ts_init.sh"
     },

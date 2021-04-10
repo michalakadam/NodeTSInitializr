@@ -4,8 +4,8 @@
 
 ##### Script functionalities:
 * creates project folder in current location
-* initializes node with typescript and live reload
-* adds jasmine with typescript support
+* initializes node with es modules typescript and live reload
+* optionally adds jasmine with typescript support
 * creates git repo with initial commit on *development* branch #holymaster
 * adds .gitignore including node and visual studio code files
 * opens project in vsc
@@ -13,6 +13,9 @@
 ##### How to run this script:
 
 ```npm i node_ts_initializr```
+
+Note: it is not advised to run this script outside of npm because folder structure
+is implemented to support npm only.
 
 ##### Requirements:
 
