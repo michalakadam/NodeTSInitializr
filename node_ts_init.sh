@@ -61,7 +61,7 @@ npm init -y
 sed -i "s/#####//g" package.json
 sed -i "s/index.js/src\/index.ts/g" package.json
 sed -i 's#"main": "src/index.ts",#"main": "src/index.ts",\n  "type": "module",#' package.json
-sed 's#"test":.*#"start": "npm run build:live",\n    "build": "tsc -p .",\n    "build:live": "nodemon --watch \x27src/**/*.ts\x27 --exec \x27ts-node\x27 src/index.ts",\n    "test": "jasmine-ts --config=jasmine.json"#g' package.json > package.tmp
+sed 's#"test":.*#"start": "npm run build:live",\n    "build": "tsc -p .",\n    "build:live": "nodemon --watch \x27src/**/*.ts\x27 --exec node --loader ts-node/esm src/index.ts",\n    "test": "jasmine-ts --config=jasmine.json"#g' package.json > package.tmp
 mv package.tmp package.json
 
 npm install --save-dev typescript
