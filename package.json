@@ -5,6 +5,7 @@
     "scripts": {
         "install": "sudo chmod u+x ./node_ts_init.sh && ./node_ts_init.sh"
     },
+    "keywords": [node, nodejs, ts, typescript, esmodules, jasmine, initializr],
     "author": "Adam Michalak <adam.michalak.dev@gmail.com>",
     "license": "MIT",
     "repository": {

@@ -14,9 +14,6 @@
 
 ```npm i node_ts_initializr```
 
-Note: it is not advised to run this script outside of npm because folder structure
-is implemented to support npm only.
-
 ##### Requirements:
 
 * Linux / Mac OS
@@ -24,6 +21,4 @@ is implemented to support npm only.
 
 **Do you have any problems running this program? Do you see any way this project can be improved?<br/>**
  Please write an email to *adam.michalak.dev@gmail.com*
-
-
 
