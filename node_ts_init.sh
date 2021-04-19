@@ -69,7 +69,7 @@ npm install --save-dev @types/node
 npm install --save express
 npm install --save-dev @types/express
 
-npx tsc --init --rootDir src --outDir dist --target ES6 --lib ES6,DOM  --module ESNEXT --moduleResolution node --esModuleInterop --resolveJsonModule
+npx tsc --init --rootDir src --outDir dist --target ES6 --lib ES6,DOM  --module ESNEXT --moduleResolution node --esModuleInterop --resolveJsonModule --noImplicitAny false
 
 mkdir src
 
